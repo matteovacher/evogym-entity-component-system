@@ -5,7 +5,7 @@ from components import *
 from tools.robot_simulator import RobotSimulator
 
 
-class GenomeOperator: 
+class GenomeOperator :  
 
     def __init__(self, config, robot_simulator) :
         self.config = config 
@@ -59,10 +59,11 @@ class GenomeOperator:
             else : 
                 connections_child1[connection] = genome2.connections[connection]
                 connections_child2[connection] = genome1.connections[connection]
+            count += 1
             
-        return connections_child1, nodes, connections_child2, nodes
+        return connections_child1, connections_child2, nodes
 
-    def mutation(self, genome, sigma) : 
+    def mutate(self, genome, sigma) : 
         for connection in genome.connections : 
             genome.connections[connection] += np.random.normal(0, sigma)
         return genome

@@ -11,6 +11,11 @@
               [3, 0, 0, 0, 3]], 
     "env_name" : "Walker-v0", 
     "n_steps" : 500, 
-    "controller_inside_shape" : [5, 8]
-    
+    "controller_inside_shape" : [5, 8], 
+    "generations" : 30, 
+    "sigma_mutate" : 1, 
+    "number_of_reported_individuals" : 5
+
+
+
 }

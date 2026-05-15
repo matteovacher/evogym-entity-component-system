@@ -48,6 +48,16 @@ class ComponentRegistry :
     def get_all_with_controller(self) : 
         return self.controller_registry.keys()
     
+    # MODIFIERS, please give an object 
+    def modify_genome(self, entity_id, genome) : 
+        self.genome_registry[entity_id] = genome
+        
+    def modify_fitness(self, entity_id, fitness) : 
+        self.fitness_registry[entity_id] = fitness 
+    
+    def modify_controller(self, entity_id, controller) : 
+        self.controller_registry[entity_id] = controller
+    
     # CLEARER METHODS 
     def clear_all_except_genome(self) : 
         self.fitness_registry.clear()

@@ -13,7 +13,7 @@ class EntityManager :
         return id 
     
     def destroy_entity(self, entity_id) : 
-        self.alive.remove(entity_id)
+        self._alive.remove(entity_id)
 
     def is_alive(self, entity_id) : 
         return entity_id in self._alive

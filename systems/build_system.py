@@ -9,6 +9,9 @@ class BuildSystem :
         self.entity_manager = entity_manager 
         self.genome_operator = genome_operator
 
+    def __str__(self) : 
+        return "BuildSystem, create initial population and add their genomes to registry"
+
 
     def process(self, registry) : 
         
@@ -16,7 +19,7 @@ class BuildSystem :
             entity_id = self.entity_manager.create_entity()
             connections, nodes = self.genome_operator.generate_first_generation_genome()
             self.registry.add_genome(entity_id, connections, nodes)
-            
+
 
 
 
