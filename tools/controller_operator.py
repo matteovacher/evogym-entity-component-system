@@ -1,9 +1,5 @@
 import math 
 
-from components import * 
-
-
-
 class ControllerOperator : 
     activation_function = math.tanh
     output_activation_function = lambda x : x 

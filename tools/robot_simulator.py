@@ -3,22 +3,17 @@ import math
 import numpy as np 
 import evogym.envs 
 
-from tools.controller_operator import ControllerOperator
-
 from evogym.utils import get_full_connectivity
-
-from components import * 
 
 class RobotSimulator : 
     
-    def __init__(self, env_name, n_steps, controller_operator) : 
-        self.env_name = env_name 
-        self.n_steps = n_steps
+    def __init__(self, config, controller_operator) : 
+        self.config = config 
         self.controller_operator = controller_operator
 
     def _get_env(self, robot) : 
         connections = get_full_connectivity(robot)
-        env = gym.make(self.env_name, body=robot, connections=connections)
+        env = gym.make(self.config.env_name, body=robot, connections=connections)
         return env
     
     def get_observation_size(self, robot) : 
@@ -28,7 +23,7 @@ class RobotSimulator :
         del env
         return len(observation)
 
-    def simulate(self, robot, controller) : 
+    def simulate(self, id, robot, controller) : 
         env = self._get_env(self, robot)
         reward = 0  
 
@@ -39,7 +34,7 @@ class RobotSimulator :
 
         finished = False 
 
-        for _ in range (self.n_steps) : 
+        for _ in range (self.config.n_steps) : 
             observation.resize(inputs_size**2)
             all_actions = self.controller_operator.activate(controller, observation)
             action = np.array([all_actions[i] for i in actuators])
@@ -55,5 +50,5 @@ class RobotSimulator :
 
         env.close()
         del env 
-        return reward, finished 
+        return id, reward, finished 
 

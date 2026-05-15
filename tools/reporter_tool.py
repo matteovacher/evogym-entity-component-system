@@ -3,9 +3,8 @@ import time
 
 class ReporterTool : 
 
-    def __init__(self, config, systems) : 
+    def __init__(self, config) : 
         self.config = config
-        self.systems = systems
         self.time = time.time()
 
 
@@ -17,11 +16,7 @@ class ReporterTool :
         print('\n')
         print('----- Running with the following systems -----')
         print('\n')
-        for system in self.systems : 
-            print(system)
-            print('\n')
-        print('----- Starting Simulation -----')
-        print('\n')
+
 
 
 

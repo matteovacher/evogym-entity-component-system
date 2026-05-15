@@ -14,8 +14,8 @@
     "controller_inside_shape" : [5, 8], 
     "generations" : 30, 
     "sigma_mutate" : 1, 
-    "number_of_reported_individuals" : 5
-
+    "number_of_reported_individuals" : 5, 
+    "cpus" : 4 
 
 
 }
