@@ -10,6 +10,7 @@ class EvaluationSystem :
         self.robot_simulator = robot_simulator
         self.reporter_tool = reporter_tool 
         self.parallel_tool = parallel_tool 
+        self.generation = 1
     
     def __str__(self) : 
         return "EvaluationSystem, evaluate al individuals in the current population and add their fitness to registry"
@@ -44,12 +45,16 @@ class EvaluationSystem :
 
 
     def process(self, registry) : 
+
+        self.reporter_tool.start_generation(self.generation)
+        self.generation += 1
+
         entity_ids = [id for id in registry.get_all_id_with_genome() if self.entity_manager.is_alive(id)]
 
         for entity_id in entity_ids : 
             genome = registry.get_genome(entity_id)
             node_evals, input_nodes, output_nodes = self.controller_operator.generate_controller_from_genome(genome)
-            registry.add_controller(node_evals, input_nodes, output_nodes)
+            registry.add_controller(entity_id, node_evals, input_nodes, output_nodes)
 
         controllers = [registry.get_controller(entity_id) for entity_id in entity_ids]
         body = self.config.body 
@@ -68,13 +73,15 @@ class EvaluationSystem :
 
         fitnesses = np.array(fitnesses)
         arg_sorted_fitnesses = np.argsort(fitnesses)
-        dict_of_best = {}
+        bests = []
         number_of_reported_individuals = self.config.number_of_reported_individuals
         for taken in range(number_of_reported_individuals) : 
-            id = arg_sorted_fitnesses[number_of_reported_individuals - 1 - taken]
-            dict_of_best[id] = registry.get_fitness(id)[0]
+            id = arg_sorted_fitnesses[len(entity_ids) - 1 - taken]
+            bests.append((ids[id], fitnesses[id]))
+            
         
-        self.reporter_tool.end_generation(dict_of_best)
+        self.reporter_tool.bests(bests)
+
             
         
 

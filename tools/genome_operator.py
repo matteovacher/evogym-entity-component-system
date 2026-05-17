@@ -29,20 +29,21 @@ class GenomeOperator :
         nodes = {}
         connections = {}
         for index_of_layer in range(len(self.shape)) :
-            nodes[index_of_layer] = []
+            nodes_on_layer = []
             for _ in range(self.shape[index_of_layer]) : 
-                nodes[index_of_layer].append(node)
+                nodes_on_layer.append(node)
+                nodes[index_of_layer] = nodes_on_layer
                 node += 1 
 
-        for layer in nodes : 
-            if layer == 0 :
-                previous_layer = layer   
+        for index_of_layer in range(len(nodes.keys())) : 
+            if index_of_layer == 0 :
+                previous_layer = nodes[index_of_layer]  
                 continue
-            for node in layer :
+            for node in nodes[index_of_layer] :
                 for previous_node in previous_layer : 
                     weight = np.random.uniform(-1, 1)
                     connections[(previous_node, node)] = weight
-            previous_layer = layer
+            previous_layer = nodes[index_of_layer]
 
         return connections, nodes
     

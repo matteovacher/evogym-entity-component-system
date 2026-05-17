@@ -3,7 +3,7 @@ import math
 class ControllerOperator : 
     activation_function = math.tanh
     output_activation_function = lambda x : x 
-    agregation_function = sum()
+    agregation_function = sum
     response = 1 
     bias = 0 
 
@@ -15,24 +15,25 @@ class ControllerOperator :
         node_evals = []
         for index_of_layer in range(len(genome.nodes.keys())) : 
             if index_of_layer == 0 : 
-                input_nodes = [0 for _ in range(len(genome.nodes[index_of_layer]))]
-                for node in genome.nodes[index_of_layer] : 
-                    input_nodes[node] = node
-                previous_layer = index_of_layer
+                input_nodes = []
+                for input_node in genome.nodes[index_of_layer] : 
+                    input_nodes.append(input_node)
+                previous_layer = genome.nodes[index_of_layer]
                 continue 
 
             if index_of_layer == len(genome.nodes.keys()) - 1 : 
-                output_nodes = [0 for _ in range(len(genome.node[index_of_layer]))]
-                for node in genome.nodes[index_of_layer] : 
-                    output_nodes[node] = node 
+                output_nodes = []
+                for output_node in genome.nodes[index_of_layer] : 
+                    output_nodes.append(output_node)
 
             for node in genome.nodes[index_of_layer] :
                 inputs_of_node = []
                 for previous_node in previous_layer : 
                     weight = genome.connections[(previous_node, node)]
-                    inputs_of_node.append(previous_node, weight)
+                    inputs_of_node.append((previous_node, weight))
                 node_evals.append((node, self.activation_function, self.agregation_function, self.bias, self.response, inputs_of_node))
 
+            previous_layer = genome.nodes[index_of_layer]
         return node_evals, input_nodes, output_nodes
     
     def activate(self, controller, input_values) :
@@ -46,7 +47,7 @@ class ControllerOperator :
                 node_inputs.append(values[previous_node] * weight)
             entering_node = agregation_function(node_inputs)
             values[node] = activation_function(bias + response * entering_node)
-        return [self.values[node] for node in controller.output_nodes]
+        return [values[node] for node in controller.output_nodes]
     
 
 

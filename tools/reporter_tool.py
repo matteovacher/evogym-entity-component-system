@@ -14,28 +14,30 @@ class ReporterTool :
         print('\n')
         print(self.config)
         print('\n')
-        print('----- Running with the following systems -----')
-        print('\n')
 
 
 
 
-    def start_generation(self, generation) : 
-        self.time = time.time()
-        print(f'----- Starting generation number {generation} out of {self.config.generations} -----')
+    def end_generation(self) : 
+        passed = time.time() - self.time
+        print(f' This Generation took {passed:.3f} s.')
         print ('\n')
 
-    def end_generation(self, dict_of_best) : 
+    def start_generation(self, generation) : 
         
-        passed = time.time() - self.time
-        print('----- Results of this generation -----')
+        self.time = time.time()
+        print(f'----- Starting generation number {generation} out of {self.config.generations} -----\n')
+        
         print('\n')
-        print(' ID \t fitness ')
-        print('====\t=========')
-        for key, value in dict_of_best.items() : 
-            print(f' {key} \t {value:.3f}')
+
+    def bests(self, bests) : 
+        print('----- Bests of this generation -----')
+        print('\t ID \t fitness ')
+        print('\t====\t=========')
+        for id, fitness in bests : 
+            print(f'\t {id} \t {fitness:.3f}')
+        
         print('\n')
-        print(f' This Generation took {passed} s.')
 
     
 

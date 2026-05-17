@@ -7,6 +7,7 @@ class ComponentRegistry :
         self.fitness_registry = {}
         self.controller_registry = {}
 
+
     # ADDER METHODS
     def add_genome(self, entity_id, connections, nodes) : 
         self.genome_registry[entity_id] = GenomeComponent(connections, nodes)
