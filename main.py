@@ -24,8 +24,8 @@ def main() :
 
     config_path = input("\nEnter the path to the config file from the configs folder (can be just config.json) : ")
     local_dir = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(local_dir, "configs", config_path)
-    with open(config_path, 'r') as f : 
+    config_path_final = os.path.join(local_dir, "configs", config_path)
+    with open(config_path_final, 'r') as f : 
         config = json.load(f)
 
     config = Config(config)
@@ -53,7 +53,7 @@ def main() :
     for generation in range(config.generations) : 
         world.step()
 
-    results_saver.save_results(world.registry, config)
+    results_saver.save_results(world.registry, config, config_path)
 
 if __name__ == "__main__" : 
     main()

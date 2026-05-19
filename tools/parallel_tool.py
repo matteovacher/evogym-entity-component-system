@@ -25,6 +25,12 @@ class ParallelTool :
         for i in range(0, length, size_of_chunk) :
             chunks.append(chunk[i:i+size_of_chunk])
         return chunks
+
+    def _worker(self, function, chunk) : 
+        results = []
+        for arguments in chunk : 
+            results.append(function(*arguments))
+        return results
     
     def _process_parallel(self, function, chunk) : 
 
@@ -44,11 +50,7 @@ class ParallelTool :
         
         return results_formatted 
 
-    def _worker(self, function, chunk) : 
-        results = []
-        for arguments in chunk : 
-            results.append(function(*arguments))
-        return results
+
             
 
     

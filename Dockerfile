@@ -5,4 +5,4 @@ RUN pip install evogym==2.0.0
 RUN pip install neat-python==0.92 imageio==2.37.3 dill==0.4.1 pathos==0.3.5 imageio[ffmpeg]==2.37.3
 ADD . /app 
 ENV PYTHONUNBUFFERED=1
-CMD ["python", "sgr_main.py"]
+CMD ["python", "main.py"]

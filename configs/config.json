@@ -1,7 +1,7 @@
 
 
 {
-    "population" : 30, 
+    "population" : 50, 
     "tournament_number" : 5, 
     "winner" : 1, 
     "body" : [[0, 2, 0, 2, 0],
@@ -11,11 +11,10 @@
               [3, 3, 0, 4, 4]], 
     "env_name" : "Walker-v0", 
     "n_steps" : 500, 
-    "controller_inside_shape" : [5, 5], 
-    "generations" : 4, 
-    "sigma_mutate" : 0.5, 
-    "number_of_reported_individuals" : 5, 
+    "controller_inside_shape" : [5, 7], 
+    "generations" : 100, 
+    "sigma_mutate" : 0.4, 
+    "number_of_reported_individuals" : 10, 
     "cpus" : 4 
-
 
 }

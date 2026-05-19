@@ -9,7 +9,8 @@ class ResultsSaver :
         self.path = None 
         self.number = None 
         self.abs_path_results = None
-        self.save = None   
+        self.save = None  
+        self.text_dir = None 
 
     def add_results_path(self) : 
         save = input("Do you want to save the results of this simulation ? \n \t [y] / [n] \n \t")
@@ -31,9 +32,9 @@ class ResultsSaver :
             self.save = False 
         print('\n\n')
     
-    def save_results(self, registry, config) :
+    def save_results(self, registry, config, config_path) :
         if self.save == True : 
-            save_config_path = os.path.join(self.abs_path_results, 'json', 'config.json')
+            save_config_path = os.path.join(self.abs_path_results, 'json', config_path)
             with open(save_config_path, 'w') as f : 
                 json.dump(config.__dict__, f, indent = 4)
 
@@ -41,8 +42,7 @@ class ResultsSaver :
                 component_path = os.path.join(self.abs_path_results, 'pkl', '{}.pkl'.format(name))
                 with open(component_path, 'wb') as f : 
                     dill.dump(component_registry, f)
-
-
+                
             print('\n----- Saved Successfully -----\n\n')
 
         
