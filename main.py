@@ -1,12 +1,13 @@
 import os
 import json  
 
+from config import Config  
 from entity_manager import EntityManager 
-from world import World 
+from world import World
+ 
 from systems.build_system import BuildSystem
 from systems.evaluation_system import EvaluationSystem
 from systems.tournament_system import TournamentSystem
-from config import Config 
 
 from tools.controller_operator import ControllerOperator
 from tools.genome_operator import GenomeOperator

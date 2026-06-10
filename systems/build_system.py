@@ -1,4 +1,4 @@
-from registry import ComponentRegistry 
+
 
 
 
